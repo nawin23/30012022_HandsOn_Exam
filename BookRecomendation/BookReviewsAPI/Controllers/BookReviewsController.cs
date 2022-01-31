@@ -15,8 +15,27 @@ namespace BookReviewsAPI.Controllers
 
 
         [HttpGet]
-        public void GetRatingsForBook()
+        public HttpResponseMessage GetRatingsForBook()
         {
+            try
+            {
+                BookRecomendationBL blObj = new BookRecomendationBL();
+                List<BookDTO> lstdto = blObj.ShowReviewsForBook();
+                if (lstdto.Count > 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, lstdto);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "No Details Found");
+                }
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
         }
 
     }

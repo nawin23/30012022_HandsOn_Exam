@@ -28,8 +28,26 @@ namespace BookRecomendationWebApp.Controllers
 
         }
 
-        public void DisplayResultsUsingWebAPI()
+        public ActionResult DisplayResultsUsingWebAPI()
         {
+            try
+            {
+                BookRecomendationBL blObj = new BookRecomendationBL();
+                List<BookDTO> lstDto = blObj.ShowReviewsForBook();
+                List<BookViewModel> modelObj = new List<BookViewModel>();
+                foreach (var books in lstDto)
+                {
+                    BookViewModel model = new BookViewModel();
+                    modelObj.BookID=
+                }
+                return View(modelObj);
+            }
+
+            catch (Exception ex)
+            {
+                return View("Error");
+            }
         }
+
     }
 }
